@@ -121,36 +121,36 @@ main = do
   let r4 = readJSON """
     [ 1, "test", 1, "a", [ 1 ] ]
   """
-  (unsafePartial $ fromLeft r4) `shouldEqual`
-    (NonEmptyList (NonEmpty (ErrorAtIndex 2 (TypeMismatch "Boolean" "Number")) Nil))
+  r4 `shouldEqual`
+    (Left (NonEmptyList (NonEmpty (ErrorAtIndex 2 (TypeMismatch "Boolean" "Number")) Nil)))
   isRight (r4 :: E MyTestTuple) `shouldEqual` false
 
   let r5 = readJSON """
     [ 1, "test", true, "a", [ 1 ], null ]
   """
-  (unsafePartial $ fromLeft r5) `shouldEqual`
-    (NonEmptyList (NonEmpty (TypeMismatch "array of length 5" "array of length 6") Nil))
+  r5 `shouldEqual`
+    (Left (NonEmptyList (NonEmpty (TypeMismatch "array of length 5" "array of length 6") Nil)))
   isRight (r5 :: E MyTestTuple) `shouldEqual` false
 
   let r6 = readJSON """
     [ 1, "test", true, "a" ]
   """
-  (unsafePartial $ fromLeft r6) `shouldEqual`
-    (NonEmptyList (NonEmpty (TypeMismatch "array of length 5" "array of length 4") Nil))
+  r6 `shouldEqual`
+    (Left (NonEmptyList (NonEmpty (TypeMismatch "array of length 5" "array of length 4") Nil)))
   isRight (r6 :: E MyTestTuple) `shouldEqual` false
 
   let r7 = readJSON """
     [ 1 ]
   """
-  (unsafePartial $ fromLeft r7) `shouldEqual`
-    (NonEmptyList (NonEmpty (TypeMismatch "array of length 5" "array of length 1") Nil))
+  r7 `shouldEqual`
+    (Left (NonEmptyList (NonEmpty (TypeMismatch "array of length 5" "array of length 1") Nil)))
   isRight (r7 :: E MyTestTuple) `shouldEqual` false
 
   let r8 = readJSON """
     []
   """
-  (unsafePartial $ fromLeft r8) `shouldEqual`
-    (NonEmptyList (NonEmpty (TypeMismatch "array of length 5" "array of length 0") Nil))
+  r8 `shouldEqual`
+    (Left (NonEmptyList (NonEmpty (TypeMismatch "array of length 5" "array of length 0") Nil)))
   isRight (r8 :: E MyTestTuple) `shouldEqual` false
 
   -- roundtrips
