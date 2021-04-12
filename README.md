@@ -1,3 +1,5 @@
+This fork provides instances for arbitrarily nested tuples. It is `ursi.simple-json` in [purs-nix](https://github.com/ursi/purs-nix).
+
 # Purescript-Simple-JSON
 
 [<img alt="build status" src="https://img.shields.io/github/workflow/status/justinwoo/purescript-simple-json/ci?logo=github&style=for-the-badge" height="20">](https://github.com/justinwoo/purescript-simple-json/actions?query=workflow%3Aci)
